@@ -1,12 +1,9 @@
 import type { AWS } from '@serverless/typescript';
 
-import getProductsList from '@functions/getProductsList';
-import getProductsById  from '@functions/getProductsById';
-
 const serverlessConfiguration: AWS = {
   service: 'product-service',
   frameworkVersion: '3',
-  plugins: ['serverless-esbuild'],
+  plugins: ['serverless-esbuild', 'serverless-dotenv-plugin'],
   provider: {
     name: 'aws',
     runtime: 'nodejs14.x',
@@ -21,8 +18,34 @@ const serverlessConfiguration: AWS = {
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
     },
   },
+  useDotenv: true,
   // import the function via paths
-  functions: { getProductsList, getProductsById },
+  functions: {
+    getProduct: {
+      handler: 'src/handler.getProduct',
+      events: [
+        {
+          http: {
+            method: 'get',
+            path: '/products/{productId}',
+            cors: true,
+          } as any
+        }
+      ]
+    },
+    getProducts: {
+      handler: 'src/handler.getProducts',
+      events: [
+        {
+          http: {
+            method: 'get',
+            path: '/products',
+            cors: true,
+          } as any
+        }
+      ]
+    }
+  },
   package: { individually: true },
   custom: {
     esbuild: {

@@ -1,6 +1,20 @@
+.idea
+.vscode
+
 # package directories
 node_modules
-jspm_packages
+*/jspm_packages
+*/node_modules
+
+# config files
+*/.env
 
 # Serverless directories
-.serverless
+*/.serverless
+
+# Webpack directories
+*/.webpack
+
+# esbuild directories
+*/.esbuild
+example
