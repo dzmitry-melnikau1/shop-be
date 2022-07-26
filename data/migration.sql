@@ -38,3 +38,9 @@
 --('c86fa0e6-6256-40e3-a081-31d656fc70ec',4),
 --('1e383352-af52-4afb-a48f-c7500c3749c6',5)
 
+
+--select p.title, p.description, p.price, s.count
+--from products p
+--inner join
+--stocks s
+--on p.id = s.product_id

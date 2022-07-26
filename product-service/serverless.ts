@@ -48,7 +48,24 @@ const serverlessConfiguration: AWS = {
           } as any
         }
       ]
-    }
+    },
+    createProduct: {
+      handler: 'src/handler.createProduct',
+      events: [
+        {
+          http: {
+            method: 'post',
+            path: '/products',
+            cors: true,
+            /*request: {
+              schema: {
+                'application/json': 'src/schemas/createProductSchema.json'
+              }
+            }*/
+          } as any
+        }
+      ]
+    },
   },
   package: { individually: true },
   custom: {

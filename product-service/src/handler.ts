@@ -10,4 +10,4 @@ const productService = new PgProductService(databaseClient)
 
 export const getProductById = handlers.getProductById(productService);
 export const getAllProducts = handlers.getProductsList(productService);
-// export const createProduct = handlers.createProductHandler(productService);
+export const createProduct = handlers.createProduct(productService);

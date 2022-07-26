@@ -1,16 +1,23 @@
-import { ProductServiceInterface, ProductInterface } from './interfaces';
+import { ProductServiceInterface, ProductsInterface, ProductInterface } from './interfaces';
 import { Client, QueryConfig } from 'pg';
 
 class PgProductService implements ProductServiceInterface {
 
-    private tableName = 'products';
+    private products = 'products';
+    private stocks = 'stocks';
 
     constructor(private databaseClient: Client){}
 
-    async getProductById(id: string): Promise<ProductInterface> {
+    async getProductById(id: string): Promise<ProductsInterface> {
 
         const query = {
-            text: `SELECT * FROM ${this.tableName} WHERE id = $1`,
+            // text: `SELECT * FROM ${this.products} WHERE id = $1`,
+            text: `select p.id, p.title, p.description, p.price, s.count 
+                   from ${this.products} p 
+                   inner join
+                   ${this.stocks} s 
+                   on p.id = s.product_id
+                   where p.id = ${id}`,
             values: [id],
         } as QueryConfig;
 
@@ -18,23 +25,28 @@ class PgProductService implements ProductServiceInterface {
         return result.rows[0] ? result.rows[0] : null;
     }
 
-    async getAllProducts(): Promise<ProductInterface[]> {
+    async getAllProducts(): Promise<ProductsInterface[]> {
         const query = {
-            text: `SELECT * FROM ${this.tableName}`,
+            // text: `SELECT * FROM ${this.tableName}`,
+            text: `select p.id, p.title, p.description, p.price, s.count 
+                   from ${this.products} p 
+                   inner join
+                   ${this.stocks} s 
+                   on p.id = s.product_id`
         } as QueryConfig;
 
         const result = await this.databaseClient.query(query);
         return result.rows ? result.rows : null;
     }
 
-    /*async create(product: Pick<ProductInterface, 'title' | 'description' | 'price' | 'logo' | 'count'>) {
+    async createProduct(products: Pick<ProductInterface, 'title' | 'description' | 'price'>) {
         const query = {
-            text: `INSERT INTO ${this.tableName}(title, description, price, logo, count) VALUES($1, $2, $3, $4, $5) RETURNING *`,
-            values: [product.title, product.description, product.price, product.logo, product.count],
+            text: `INSERT INTO ${this.products}(title, description, price) VALUES($1, $2, $3) RETURNING *`,
+            values: [products.title, products.description, products.price],
         };
         const result = await this.databaseClient.query(query);
         return result.rows[0] ? result.rows[0] : null;
-    }*/
+    }
 }
 
 export { PgProductService };
