@@ -1,52 +1,40 @@
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-CREATE TABLE IF NOT EXISTS products (
-    id UUID DEFAULT uuid_generate_v4 (),
-    title TEXT,
-    description TEXT,
-    price INT,
-    logo TEXT,
-    count INT
-);
-INSERT INTO products (title, description, price, logo, count)
-values (
-        'Product 1',
-        'Product 1 description',
-        1000,
-        'https://r5.readrate.com/img/pictures/basic/792/792600/7926007/w800h317-76be96b9.jpg',
-        1
-    ),
-    (
-        'Product 2',
-        'Product 2 description',
-        2000,
-        'https://r2.readrate.com/img/pictures/basic/792/792600/7926008/w800h317-89405d1d.jpg',
-        2
-    ),
-    (
-        'Product 3',
-        'Product 3 description',
-        3000,
-        'https://r5.readrate.com/img/pictures/basic/792/792600/7926009/w800h317-da60182f.jpg',
-        3
-    ),
-    (
-        'Product 4',
-        'Product 4 description',
-        4000,
-        'https://r2.readrate.com/img/pictures/basic/792/792601/7926010/w800h317-04d81319.jpg',
-        4
-    ),
-    (
-        'Product 5',
-        'Product 5 description',
-        5000,
-        'https://r2.readrate.com/img/pictures/basic/792/792601/7926014/w800h317-a1bf3137.jpg',
-        5
-    ),
-    (
-        'Product 6',
-        'Product 6 description',
-        6000,
-        'https://r5.readrate.com/img/pictures/basic/792/792601/7926015/w800h317-8f4d4f25.jpg',
-        6
-    );
+--create table if not exists products (
+--	id uuid primary key default uuid_generate_v4(),
+--	title text,
+--	description text,
+--	price int
+--)
+
+--create extension if not exists "uuid-ossp"
+
+--drop table products
+
+--create table if not exists stocks (
+--	product_id uuid,
+--	count int,
+--	foreign key ("product_id") references "products" ("id")
+--)
+
+--drop table stocks
+
+--insert into products  (title, description, price) values
+--('Principles: Life and Work','Principles: Life and Work by Ray Dalio',24),
+--('Stillness Is the Key','Stillness Is the Key by Ryan Holiday',10),
+--('The Miracle Morning','The Miracle Morning: The Not-So-Obvious Secret Guaranteed to Transform Your Life (Before 8AM)',15),
+--('The Ride of a Lifetime','The Ride of a Lifetime: Lessons Learned from 15 Years as CEO of the Walt Disney Company',23),
+--('Work Rules!','Work Rules!: Insights from Inside Google That Will Transform How You Live and Lead',15),
+--('Simple Rules','Simple Rules: How to Thrive in a Complex World',23),
+--('The Power of Positive Leadership','The Power of Positive Leadership: How and Why Positive Leaders Transform Teams and Organizations and Change the World',15),
+--('The Power of Habit','The Power of Habit: Why We Do What We Do in Life and Business',23)
+
+
+--insert into stocks  (product_id, count) values
+--('c56ce99e-945a-4066-b4dc-a84edbd41658',3),
+--('ac3ec140-a971-4ea3-ad30-cabe63eb382f',4),
+--('84a7c88a-ee32-4b60-919b-1baf067f6486',5),
+--('0167d796-6d98-432e-bd56-5aa8f89686fc',6),
+--('3f0cfb96-a32f-4272-b426-35238a6bb151',7),
+--('04e4a4d8-1f40-4500-95c7-af18ea4a9942',2),
+--('c86fa0e6-6256-40e3-a081-31d656fc70ec',4),
+--('1e383352-af52-4afb-a48f-c7500c3749c6',5)
+

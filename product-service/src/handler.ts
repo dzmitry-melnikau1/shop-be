@@ -1,6 +1,6 @@
-import * as handlers from './src/functions';
+import * as handlers from './functions';
 import { Client } from 'pg';
-import { PgProductService } from './src/services/pg-product.service';
+import { PgProductService } from './services/pg-product.service';
 
 console.log(process.env);
 
