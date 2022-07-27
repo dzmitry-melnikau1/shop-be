@@ -12,15 +12,13 @@ class PgProductService implements ProductServiceInterface {
 
         const query = {
             // text: `SELECT * FROM ${this.products} WHERE id = $1`,
-            text: `select p.id, p.title, p.description, p.price, s.count 
-                   from ${this.products} p 
+            text: `select p.title, p.description, p.price, s.count
+                   from products p
                    inner join
-                   ${this.stocks} s 
-                   on p.id = s.product_id
-                   where p.id = ${id}`,
-            values: [id],
+                   stocks s 
+                   on p.id = s.product_id`,
+            value: [id]
         } as QueryConfig;
-
         const result = await  this.databaseClient.query(query);
         return result.rows[0] ? result.rows[0] : null;
     }

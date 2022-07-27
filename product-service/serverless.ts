@@ -10,23 +10,23 @@ const serverlessConfiguration: AWS = {
   ],
   provider: {
     name: 'aws',
-    runtime: 'nodejs14.x',
+    runtime: 'nodejs16.x',
     stage: 'dev',
     region: 'eu-west-1',
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
     },
-    environment: {
+    /*environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
-    },
+    },*/
   },
   useDotenv: true,
   // import the function via paths
   functions: {
     getProduct: {
-      handler: 'src/handler.getProduct',
+      handler: 'src/handler.getProductById',
       events: [
         {
           http: {
@@ -38,7 +38,7 @@ const serverlessConfiguration: AWS = {
       ]
     },
     getProducts: {
-      handler: 'src/handler.getProducts',
+      handler: 'src/handler.getAllProducts',
       events: [
         {
           http: {
@@ -74,7 +74,7 @@ const serverlessConfiguration: AWS = {
       minify: false,
       sourcemap: true,
       exclude: ['aws-sdk'],
-      target: 'node14',
+      target: 'node16',
       define: { 'require.resolve': undefined },
       platform: 'node',
       concurrency: 10,
