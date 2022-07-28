@@ -3,14 +3,16 @@ import type { AWS } from '@serverless/typescript';
 const serverlessConfiguration: AWS = {
   service: 'product-service',
   frameworkVersion: '3',
+  variablesResolutionMode: '20210219',
   plugins: [
     'serverless-esbuild',
     'serverless-offline',
     'serverless-dotenv-plugin',
+    'serverless-webpack'
   ],
   provider: {
     name: 'aws',
-    runtime: 'nodejs14.x',
+    runtime: 'nodejs12.x',
     stage: 'dev',
     region: 'eu-west-1',
     apiGateway: {
@@ -26,7 +28,7 @@ const serverlessConfiguration: AWS = {
   // import the function via paths
   functions: {
     getProduct: {
-      handler: 'src/handler.getProductById',
+      handler: 'handler.getProductById',
       events: [
         {
           http: {
@@ -38,7 +40,7 @@ const serverlessConfiguration: AWS = {
       ]
     },
     getProducts: {
-      handler: 'src/handler.getAllProducts',
+      handler: 'handler.getAllProducts',
       events: [
         {
           http: {
@@ -50,7 +52,7 @@ const serverlessConfiguration: AWS = {
       ]
     },
     createProduct: {
-      handler: 'src/handler.createProduct',
+      handler: 'handler.createProduct',
       events: [
         {
           http: {
@@ -69,6 +71,10 @@ const serverlessConfiguration: AWS = {
   },
   package: { individually: true },
   custom: {
+    webpack: {
+      webpackConfig: 'webpack.config.js',
+      includeModules: true
+    },
     esbuild: {
       bundle: true,
       minify: false,

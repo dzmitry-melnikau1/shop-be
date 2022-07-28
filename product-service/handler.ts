@@ -1,6 +1,6 @@
-import * as handlers from './functions';
+import * as handlers from './src/functions';
 import { Client } from 'pg';
-import { PgProductService } from './services/pg-product.service';
+import { PgProductService } from './src/services/pg-product.service';
 
 const {PG_HOST, PG_DATABASE, PG_PASSWORD, PG_USERNAME} = process.env;
 
