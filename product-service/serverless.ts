@@ -5,7 +5,6 @@ const serverlessConfiguration: AWS = {
   frameworkVersion: '3',
   variablesResolutionMode: '20210219',
   plugins: [
-    'serverless-esbuild',
     'serverless-offline',
     'serverless-dotenv-plugin',
     'serverless-webpack'
@@ -74,17 +73,6 @@ const serverlessConfiguration: AWS = {
     webpack: {
       webpackConfig: 'webpack.config.js',
       includeModules: true
-    },
-    esbuild: {
-      bundle: true,
-      minify: false,
-      sourcemap: true,
-      exclude: ['aws-sdk'],
-      target: 'node14',
-      define: { 'require.resolve': undefined },
-      platform: 'node',
-      concurrency: 10,
-      external: ['pg-native', 'mock-aws-s3', 'nock']
     },
     'serverless-offline': {
       httpPort: 5000
