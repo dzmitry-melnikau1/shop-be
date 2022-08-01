@@ -79,7 +79,6 @@ const serverlessConfiguration: Serverless = {
             existing: true
           }
         }
-
       ]
     }
   },
